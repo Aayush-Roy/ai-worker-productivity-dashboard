@@ -1,0 +1,54 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Worker {
+  id        String   @id
+  name      String
+  events    Event[]
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("workers")
+}
+
+model Workstation {
+  id        String   @id
+  name      String
+  events    Event[]
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("workstations")
+}
+
+enum EventType {
+  working
+  idle
+  absent
+  product_count
+}
+
+model Event {
+  id            String      @id @default(uuid())
+  timestamp     DateTime
+  workerId      String      @map("worker_id")
+  workstationId String      @map("workstation_id")
+  eventType     EventType   @map("event_type")
+  confidence    Float
+  count         Int?
+  modelVersion  String?     @map("model_version")
+  createdAt     DateTime    @default(now()) @map("created_at")
+  
+  worker        Worker      @relation(fields: [workerId], references: [id])
+  workstation   Workstation @relation(fields: [workstationId], references: [id])
+
+  @@unique([timestamp, workerId, workstationId], name: "idempotency_key")
+  @@index([workerId])
+  @@index([workstationId])
+  @@index([timestamp])
+  @@map("events")
+}
