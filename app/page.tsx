@@ -41,44 +41,62 @@ export default function DashboardPage() {
   return (
     <div className="min-h-screen bg-background">
       {/* Header with gradient */}
-      <header className="relative overflow-hidden border-b bg-gradient-to-r from-indigo-600 via-indigo-500 to-blue-500">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4xIj48Y2lyY2xlIGN4PSIzMCIgY3k9IjMwIiByPSIyIi8+PC9nPjwvZz48L3N2Zz4=')] opacity-30" />
-        <div className="container relative mx-auto px-4 py-6 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <div className="rounded-xl bg-white/20 p-3 backdrop-blur-sm ring-2 ring-white/30">
-                {/* <Factory className="h-7 w-7 text-white" /> */}
-                <Image
-  src="/storage-stacks.png"
-  alt="Storage Stacks"
-  width={50}
-  height={30}
-/>
-              </div>
-              <div>
-                <h1 className="text-2xl font-bold text-white">Worker Productivity Dashboard</h1>
-                <p className="text-sm text-indigo-100">
-                  AI-Powered Manufacturing Analytics
-                </p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <div className="flex items-center gap-2 rounded-full bg-white/20 px-4 py-2 backdrop-blur-sm ring-1 ring-white/30">
-                <div className="relative flex h-2.5 w-2.5">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                  <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400" />
-                </div>
-                <span className="text-sm font-medium text-white">Live</span>
-              </div>
-              <div className="hidden sm:flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 backdrop-blur-sm">
-                <Zap className="h-4 w-4 text-amber-300" />
-                <span className="text-sm text-indigo-100">Real-time sync</span>
-              </div>
-            </div>
+      
+    <header className="sticky top-0 z-50 border-b border-gray-800/50 bg-gray-950/80 backdrop-blur-xl">
+  <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="flex h-14 items-center justify-between">
+      
+      {/* Left */}
+      <div className="flex items-center gap-6">
+        <div className="group flex items-center gap-3">
+          <div className="rounded-lg bg-gradient-to-br from-indigo-500 to-indigo-600 p-2 ring-1 ring-white/10 group-hover:ring-white/20 transition-all duration-200">
+            <Image
+              src="/storage-stacks.png"
+              alt="Storage Stacks"
+              width={24}
+              height={24}
+            />
           </div>
+          <h1 className="text-base font-semibold text-white">
+            Worker Productivity
+          </h1>
         </div>
-      </header>
 
+        <div className="hidden md:block h-5 w-px bg-gray-800" />
+
+        <nav className="hidden md:flex items-center gap-1">
+          <button className="rounded-md px-3 py-1.5 text-sm font-medium text-white hover:bg-gray-800 transition-colors">
+            Overview
+          </button>
+          <button className="rounded-md px-3 py-1.5 text-sm font-medium text-gray-400 hover:bg-gray-800 hover:text-gray-200 transition-colors">
+            Analytics
+          </button>
+          <button className="rounded-md px-3 py-1.5 text-sm font-medium text-gray-400 hover:bg-gray-800 hover:text-gray-200 transition-colors">
+            Team
+          </button>
+        </nav>
+      </div>
+
+      {/* Right */}
+      <div className="flex items-center gap-2.5">
+        <div className="hidden sm:flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3 py-1 backdrop-blur-sm">
+          <div className="relative flex h-1.5 w-1.5">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+            <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
+          </div>
+          <span className="text-xs font-medium text-emerald-400">Live</span>
+        </div>
+
+        <button className="flex items-center gap-2 rounded-lg border border-gray-800 bg-gray-900/50 px-2.5 py-1.5 hover:border-gray-700 hover:bg-gray-800/50 transition-all duration-150">
+          <div className="h-5 w-5 rounded-full bg-gradient-to-br from-violet-500 to-fuchsia-600" />
+          
+          <span className="hidden md:block text-sm font-medium text-gray-300">You</span>
+          <Image src="/user-setting.png" height={20} width={20} alt='admin'/>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
       <main className="container mx-auto px-4 py-8 sm:px-6 lg:px-8">
         <div className="space-y-8">
           {/* Factory Summary Cards */}
