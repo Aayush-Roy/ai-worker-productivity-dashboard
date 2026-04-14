@@ -8,6 +8,7 @@ import { WorkstationsTable } from '@/components/dashboard/workstations-table';
 import { ProductionChart } from '@/components/dashboard/production-chart';
 import { TimelineChart } from '@/components/dashboard/timeline-chart';
 import { Filters } from '@/components/dashboard/filters';
+
 import {
   mockWorkers,
   mockWorkstations,
@@ -16,6 +17,7 @@ import {
   mockFactoryMetrics,
   mockProductionOverTime,
 } from '@/lib/mock-data';
+import Image from 'next/image';
 
 function formatMinutesToHours(minutes: number): string {
   const hours = Math.floor(minutes / 60);
@@ -45,7 +47,13 @@ export default function DashboardPage() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               <div className="rounded-xl bg-white/20 p-3 backdrop-blur-sm ring-2 ring-white/30">
-                <Factory className="h-7 w-7 text-white" />
+                {/* <Factory className="h-7 w-7 text-white" /> */}
+                <Image
+  src="/storage-stacks.png"
+  alt="Storage Stacks"
+  width={50}
+  height={30}
+/>
               </div>
               <div>
                 <h1 className="text-2xl font-bold text-white">Worker Productivity Dashboard</h1>
