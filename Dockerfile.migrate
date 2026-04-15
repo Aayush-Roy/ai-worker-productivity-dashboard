@@ -1,22 +1,49 @@
 
+# FROM node:20-alpine
+
+# WORKDIR /app
+
+# # IMPORTANT
+# RUN apk add --no-cache openssl
+
+# RUN corepack enable && corepack prepare pnpm@latest --activate
+
+# COPY package.json pnpm-lock.yaml* ./
+# COPY prisma ./prisma/
+
+# RUN pnpm install
+
+# RUN pnpm prisma generate
+
+# COPY . .
+
+# RUN pnpm add -D tsx
+
+# CMD ["sh","-c","npx prisma migrate deploy && npx tsx prisma/seed.ts"]
 FROM node:20-alpine
 
 WORKDIR /app
 
-# IMPORTANT
+# IMPORTANT: Prisma requires openssl in alpine images
 RUN apk add --no-cache openssl
 
-RUN corepack enable && corepack prepare pnpm@latest --activate
-
-COPY package.json pnpm-lock.yaml* ./
+# Copy package files
+COPY package*.json ./
 COPY prisma ./prisma/
 
-RUN pnpm install
+# Install dependencies using npm
+RUN npm install
 
-RUN pnpm prisma generate
+# Generate Prisma Client
+RUN npx prisma generate
 
+# Copy the rest of the application
 COPY . .
 
-RUN pnpm add -D tsx
+# Ensure tsx is available for the seed script
+RUN npm install -g tsx
 
-CMD ["sh","-c","npx prisma migrate deploy && npx tsx prisma/seed.ts"]
+# Run migrations and then seed the database
+# CMD ["sh", "-c", "npx prisma migrate deploy && npx tsx prisma/seed.ts"]
+# Dockerfile.migrate ki last line aisi honi chahiye:
+CMD ["sh", "-c", "npx prisma db push && npx tsx prisma/seed.ts"]
