@@ -1,25 +1,3 @@
-
-# FROM node:20-alpine
-
-# WORKDIR /app
-
-# # IMPORTANT
-# RUN apk add --no-cache openssl
-
-# RUN corepack enable && corepack prepare pnpm@latest --activate
-
-# COPY package.json pnpm-lock.yaml* ./
-# COPY prisma ./prisma/
-
-# RUN pnpm install
-
-# RUN pnpm prisma generate
-
-# COPY . .
-
-# RUN pnpm add -D tsx
-
-# CMD ["sh","-c","npx prisma migrate deploy && npx tsx prisma/seed.ts"]
 FROM node:20-alpine
 
 WORKDIR /app
