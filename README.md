@@ -173,6 +173,24 @@ The application will be available at [http://localhost:3000](http://localhost:30
 | GET | /api/metrics/workstations | Get workstation metrics |
 | GET | /api/metrics/factory | Get factory summary metrics |
 
+# Database Configuration
+The application supports both a local Dockerized database and a remote Cloud database (Neon). You must configure your .env file based on your environment:
+
+## 1. Using Local Docker Database (Recommended for Testing)
+If you are running everything via Docker Compose, use the internal service URL. This matches the configuration in the docker-compose.yml.
+
+Bash
+# Use this in your .env file
+DATABASE_URL="postgresql://postgres:postgres@db:5432/productivity"
+## 2. Using Neon Cloud Database
+If you prefer to connect to the hosted Neon database (currently live on the cloud), update your URL. Note: When running in Docker with a cloud DB, you can technically stop the db service container to save resources.
+
+Bash
+# Use this in your .env file
+DATABASE_URL="postgresql://neondb_owner:npg_TRt1l3pixKfc@ep-dark-recipe-a1l84gb6.ap-southeast-1.aws.neon.tech/neondb?sslmode=require"
+Warning: If you switch to the local Docker database, make sure to run pnpm db:seed or npx prisma db seed to populate the fresh database with initial workers and metrics, as the local DB starts empty.
+
+
 ### Query Parameters
 
 - `workerId`: Filter metrics by worker (e.g., `?workerId=W1`)
